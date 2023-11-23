@@ -129,13 +129,13 @@ Please write your answers here
 10. b
 11. c
 12. The process can be in the following states:
-    a) Ready State (Runnable): This is the state where the process is waiting for scheduler to schedule it for execution (basically for CPU access) in the ready queue.
-    b) Running State: This is the state in which a process is when it is running on the cpu.
+#^  a) Ready State (Runnable): This is the state where the process is waiting for scheduler to schedule it for execution (basically for CPU access) in the ready queue.
+#^  b) Running State: This is the state in which a process is when it is running on the cpu.
     c) Sleeping State: This is the state in which a process is when it is not runninf currently and is waiting for an operation to end like an I/O operation.
     d) Zombie State: The process enters this state when the exit status is still needed by the parent so although the process is terminated, it is not completely terminated unless allowed by the parent.
     e) Newborn State (Embryo): This is the state of the process when the process is just created and is ready to enter into the ready queue.
     f) Unused State: This is the state in which a process is after termination or when it has not yet been used.
-13. Following is the layerwise structure of xv6:
+14. Following is the layerwise structure of xv6:
     a) File Descriptor: Xv6 gives each process its own table of open files, or file descriptors. A file descriptor is a small integer representing a kernel-managed object that a process may read from or write to. A process may obtain a file 
        descriptor by opening a file, directory, or device or by creating a pipe, or by duplicating an existing descriptor.
     b) Pathname: This layer provides hierarchical path names like and returns them on demand with recursive lookup. It allows the operating system to manage the disk.
