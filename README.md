@@ -129,14 +129,41 @@ Please write your answers here
 10. b
 11. c
 12. The process can be in the following states:
-#^  a) Ready State (Runnable): This is the state where the process is waiting for scheduler to schedule it for execution (basically for CPU access) in the ready queue.
-#^  b) Running State: This is the state in which a process is when it is running on the cpu.
-    c) Sleeping State: This is the state in which a process is when it is not runninf currently and is waiting for an operation to end like an I/O operation.
-    d) Zombie State: The process enters this state when the exit status is still needed by the parent so although the process is terminated, it is not completely terminated unless allowed by the parent.
-    e) Newborn State (Embryo): This is the state of the process when the process is just created and is ready to enter into the ready queue.
-    f) Unused State: This is the state in which a process is after termination or when it has not yet been used.
-14. Following is the layerwise structure of xv6:
-    a) File Descriptor: Xv6 gives each process its own table of open files, or file descriptors. A file descriptor is a small integer representing a kernel-managed object that a process may read from or write to. A process may obtain a file 
-       descriptor by opening a file, directory, or device or by creating a pipe, or by duplicating an existing descriptor.
-    b) Pathname: This layer provides hierarchical path names like and returns them on demand with recursive lookup. It allows the operating system to manage the disk.
-    c) 
+   1. Ready State (Runnable): This is the state where the process is waiting for scheduler to schedule it for execution (basically for CPU access) in the ready queue.
+   2. Running State: This is the state in which a process is when it is running on the cpu.
+   3. Sleeping State: This is the state in which a process is when it is not runninf currently and is waiting for an operation to end like an I/O operation.
+   4. Zombie State: The process enters this state when the exit status is still needed by the parent so although the process is terminated, it is not completely terminated unless allowed by the parent.
+   5. Newborn State (Embryo): This is the state of the process when the process is just created and is ready to enter into the ready queue.
+   6. Unused State: This is the state in which a process is after termination or when it has not yet been used.
+
+13. Following is the layerwise structure of xv6:
+   1. File Descriptor: Xv6 gives each process its own table of open files, or file descriptors. A file descriptor is a small integer representing a kernel-managed object that a process may read from or write to. A process may obtain a file descriptor by opening a file, directory, or device or by creating a pipe, or by duplicating an existing descriptor.
+   2. Pathname: This layer provides hierarchical path names like and returns them on demand with recursive lookup. It allows the operating system to manage the disk.
+   3. Directory: A directory is implemented internally much like a file. Its inode has type T_DIR and its data is a sequence of directory entries. Each entry is a struct dirent, which contains a name and an inode number.
+   4. Inodes: The term inode can have one of two related meanings. It might refer to the on-disk data structure containing a file’s size and list of data block numbers. Or “inode” might refer to an in-memory inode, which contains a copy of the on disk inode as well as extra information needed within the kernel.
+   5. Logging: The logging layer allows higher layers to wrap updates to several blocks in a transaction, and ensures that the blocks are updated atomically in the face of crashes.
+   6. Buffer Cache: The buffer cache has two jobs: (1) synchronize access to disk blocks to ensure that only one copy of a block is in memory and that only one kernel thread at a time uses that copy; (2) cache popular blocks so that they don’t need to be re-read from the slow disk
+   7. Disk: The disk layer reads and writes blocks on an virtio hard drive. Disk hardware traditionally presents the data on the disk as a numbered sequence of 512-byte blocks (also called sectors): sector 0 is the first 512 bytes, sector 1 is the next, and so on.
+
+14. System calls and library functions are mechanisms for interfacing with the operating system, each with distinct characteristics. System calls are low-level requests made by a program to the operating system kernel, necessitating a switch from user mode to kernel mode. They provide essential services such as file I/O, process creation, and memory allocation, involving a higher overhead due to the privilege level change. In contrast, library functions are higher-level routines provided by software libraries, typically implemented in user space. Unlike system calls, library functions do not require a change in privilege level and execute within the existing permissions of the process. Library functions, such as those in the C Standard Library, offer a more portable and user-friendly interface, making them a convenient choice for common tasks without the overhead associated with system calls.
+
+15. In xv6, memory paging is implemented as a part of the memory management system. The xv6 operating system uses a demand-paging scheme where pages of secondary memory are loaded into physical memory only when they are accessed. The benefits of using paging in memory management include efficient use of physical memory, and simplifying memory allocation. Paging allows processes to have the illusion of a contiguous address space, simplifying memory management and providing better isolation between processes. It also facilitates efficient use of physical memory by allowing the operating system to swap pages in and out as needed, reducing the overall memory requirements for running processes.
+
+16. 1. ls: he ls command is used to list the contents of a directory.
+    2. cd: This command is used to change the working directory.
+    3. cp: The cp command is used to copy files or directories.
+
+17. In xv6, process synchronization relies on the use of locks. Employing a process synchronization mechanism is crucial to uphold memory consistency by preventing race conditions and mitigating the risk of deadlock situations.
+
+18. In the xv6 operating system, interrupts play a crucial role in promptly responding to external events and enabling effective multitasking. These signals, generated by external devices or internal conditions, eliminate the need for continuous polling. Interrupts facilitate context switching by allowing the operating system to save and restore process states, contributing to efficient multitasking.
+
+19. There is no concept of virtual memory in xv6.
+
+20. make qemu-nox command is used to boot the XV6. Following processes are involved in the bootup:
+   1. BIOS initialization
+   2. Boot loader execution
+   3. Kernel entry point
+   4. Memory setup
+   5. Device initialization
+   6. Process creation
+   7. User program execution
